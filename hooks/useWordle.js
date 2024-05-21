@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-const useWordle = (solution) => {
+const useWordle = (solution, lang) => {
     const [turn, setTurn] = useState(0);
     const [currentGuess, setCurrentGuess] = useState("");
     const [guesses, setGuesses] = useState([...Array(6)]);
     const [history, setHistory] = useState([]);
     const [isCorrect, setIsCorrect] = useState(false);
     const [usedKeys, setUsedKeys] = useState({});
+    const [isGameOver, setIsGameOver] = useState(false);
 
     const formatGuess = () => {
         let solutionArray = [...solution];
@@ -34,6 +35,7 @@ const useWordle = (solution) => {
     const addNewGuess = (formattedGuess) => {
         if (currentGuess === solution) {
             setIsCorrect(true);
+            setIsGameOver(true);
         }
         setGuesses((prevGuesses) => {
             let newGuesses = [...prevGuesses];
@@ -69,10 +71,23 @@ const useWordle = (solution) => {
         setCurrentGuess("");
     };
 
+    const reset = () => {
+        setTurn(0);
+        setCurrentGuess("");
+        setGuesses([...Array(6)]);
+        setHistory([]);
+        setIsCorrect(false);
+        setUsedKeys({});
+        setIsGameOver(false);
+    };
+
     const handleKeyup = ({ key }) => {
+        if (isGameOver) return;
+
         if (key === "Enter") {
             if (turn > 5) {
                 console.log("You used all guesses!");
+                setIsGameOver(true);
                 return;
             }
             if (history.includes(currentGuess)) {
@@ -91,14 +106,14 @@ const useWordle = (solution) => {
             setCurrentGuess((prev) => prev.slice(0, -1));
             return;
         }
-        if (/^[A-Za-z]$/.test(key)) {
+        if (/^[A-Za-zğüşıöçĞÜŞİÖÇ]$/.test(key)) {
             if (currentGuess.length < 5) {
                 setCurrentGuess((prev) => prev + key);
             }
         }
     };
 
-    return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup };
+    return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, reset };
 }
 
 export default useWordle;

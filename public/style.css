@@ -1,0 +1,27 @@
+.container {
+    text-align: center;
+    padding: 40px;
+}
+
+
+
+.link-container {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    color: #1a0dab;
+    text-decoration: none;
+    border: 2px solid #1a0dab;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px;
+}
+
+a:hover {
+    text-decoration: none;
+    background-color: #1a0dab;
+    color: #fff;
+}

@@ -10,7 +10,6 @@ export default function Grid({ guesses, currentGuess, turn }) {
                 }
                 return <Row key={i} guess={g} />;
             })}
-            {/* Boş satırlar döndürülüyor */}
             {[...Array(6 - guesses.length)].map((_, i) => (
                 <Row key={i + guesses.length} />
             ))}

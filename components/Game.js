@@ -1,16 +1,15 @@
-// Game.js
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Wordle from './Wordle';
 import useWordle from '../hooks/useWordle';
 
-export default function Game() {
+export default function Game({ lang }) {
     const [solution, setSolution] = useState(null);
+    const router = useRouter();
 
-    const { isCorrect, turn } = useWordle(solution);
-
-    // Yeni bir kelime alacak fonksiyon
     const fetchNewWord = () => {
-        fetch("data/tr.json")
+        const fileName = lang === 'en' ? 'en.json' : 'tr.json';
+        fetch(`data/${fileName}`)
             .then((res) => res.json())
             .then((json) => {
                 const solutions = json.solutions;
@@ -22,24 +21,36 @@ export default function Game() {
             });
     };
 
-    // Cevabı doğru bildiğinizde veya oyun bitmediğinde yeni kelime al
-    const handleCorrectAnswer = () => {
-        if (!isCorrect || turn > 5) { // isCorrect durumunu tersine çevirdik
-            fetchNewWord();
-        }
+    const handleRestart = () => {
+        router.push("/");
     };
 
+    const { isCorrect, turn, reset } = useWordle(solution);
+
     useEffect(() => {
-        // İlk yükleme için bir kelime al
+        if (isCorrect || turn > 5) {
+            setScore(prevScore => prevScore + 15);
+            setTimer(prevTimer => prevTimer + 15);
+            fetchNewWord();
+            reset();
+        }
+    }, [isCorrect, turn, fetchNewWord, reset]);
+
+    useEffect(() => {
         fetchNewWord();
     }, []);
 
     return (
-        <>
-            <div className='App'>
-                {solution}
-                {solution && <Wordle solution={solution} isCorrect={handleCorrectAnswer} />}
-            </div>
-        </>
+        <div className='App'>
+            <h1>Wordle</h1>
+            {solution}
+            {solution && (
+                <Wordle
+                    solution={solution}
+                    handleRestart={handleRestart}
+                    fetchNewWord={fetchNewWord}
+                />
+            )}
+        </div>
     );
 }

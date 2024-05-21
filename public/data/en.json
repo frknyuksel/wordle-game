@@ -1,0 +1,84 @@
+{
+    "solutions": [
+        {
+            "id": 1,
+            "word": "apple"
+        },
+        {
+            "id": 2,
+            "word": "chair"
+        },
+        {
+            "id": 3,
+            "word": "daisy"
+        },
+        {
+            "id": 4,
+            "word": "eagle"
+        },
+        {
+            "id": 5,
+            "word": "fairy"
+        },
+        {
+            "id": 6,
+            "word": "glove"
+        },
+        {
+            "id": 7,
+            "word": "hatch"
+        },
+        {
+            "id": 8,
+            "word": "jelly"
+        },
+        {
+            "id": 9,
+            "word": "koala"
+        },
+        {
+            "id": 10,
+            "word": "lemon"
+        },
+        {
+            "id": 11,
+            "word": "magic"
+        },
+        {
+            "id": 12,
+            "word": "noble"
+        },
+        {
+            "id": 13,
+            "word": "oasis"
+        },
+        {
+            "id": 14,
+            "word": "piano"
+        },
+        {
+            "id": 15,
+            "word": "quack"
+        },
+        {
+            "id": 16,
+            "word": "ruler"
+        },
+        {
+            "id": 17,
+            "word": "sushi"
+        },
+        {
+            "id": 18,
+            "word": "train"
+        },
+        {
+            "id": 19,
+            "word": "ultra"
+        },
+        {
+            "id": 20,
+            "word": "vital"
+        }
+    ]
+}

@@ -1,26 +1,16 @@
-import React from 'react'
-
-export default function Modal({ isCorrect, solution, turn }) {
+import React from "react";
 
 
-
-
+export default function Modal({ isCorrect, solution, turn, score, handleRestart }) {
     return (
-        <div className='modal'>{isCorrect && (
+        <div className='modal'>
             <div>
-                <h1>You Win</h1>
+                <h1>{isCorrect ? 'You Win' : 'Time\'s Up'}</h1>
                 <p className='solution'>{solution}</p>
-                <p>You found the word in {turn} guesses</p>
+                <p>{isCorrect ? `You found the word in ${turn} guesses` : 'Better luck next time'}</p>
+                <p>Your score: {score}</p>
+                <button onClick={handleRestart}>New Game</button>
             </div>
-        )}
-            {!isCorrect && (
-                <div>
-                    <h1>Unlucky</h1>
-                    <p className='solution'>{solution}</p>
-                    <p>Better luck next time </p>
-                </div>
-            )}
-
         </div>
     );
 }
